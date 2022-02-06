@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 
 @Entity
 public class Member {
-    public Long id;
+    private Long id;
     public String name;
 
     public Address address;
