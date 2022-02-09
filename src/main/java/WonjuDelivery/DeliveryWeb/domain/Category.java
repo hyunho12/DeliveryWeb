@@ -9,11 +9,13 @@ import javax.persistence.Id;
 
 @Entity
 @Getter
-public class category {
+public class Category {
     @Id @GeneratedValue
     @Column(name = "category_id")
     private Long id;
 
     @Column(name = "cate_name")
     public String name;
+
+
 }

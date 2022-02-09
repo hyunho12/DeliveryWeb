@@ -5,7 +5,6 @@ import lombok.Getter;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 
-@Entity
 @Getter
 @Embeddable
 public class Address {

@@ -2,14 +2,11 @@ package WonjuDelivery.DeliveryWeb.domain;
 
 import lombok.Getter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Getter
-public class shop {
+public class Shop {
     @Id @GeneratedValue
     @Column(name = "shop_id")
     private Long id;
@@ -23,4 +20,7 @@ public class shop {
     public String shopTel;
     public String ceo;
     public String shopNo;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    public Category category;
 }
