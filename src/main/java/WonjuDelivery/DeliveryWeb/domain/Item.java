@@ -14,7 +14,7 @@ public class Item {
     private Long id;
 
     public String name;
-    public String price;
+    private int price;
     public String detail;
     public int stockQuantity;
 
