@@ -2,6 +2,7 @@ package WonjuDelivery.DeliveryWeb.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.aspectj.weaver.ast.Or;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -22,8 +23,11 @@ public class Order {
     public Member member;
 
     @JoinColumn(name = "delivery_id")
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     public Delivery delivery;
+
+    @Enumerated(EnumType.STRING)
+    private OrderStatus orderStatus;
 
     @OneToMany(mappedBy = "order")
     public List<OrderItem> orderItems = new ArrayList<>();
@@ -50,8 +54,29 @@ public class Order {
         for(OrderItem orderItem : orderItems){
             order.addOrderItem(orderItem);
         }
+        order.setOrderStatus(OrderStatus.ORDER);
+        order.setOrderDate(LocalDateTime.now());
 
         return order;
+    }
+
+    public void cancel(){
+        if(delivery.getDeliveryStatus() == DeliveryStatus.COMP){
+            throw new IllegalStateException("이미 배송완료된 상품은 취소 불가능합니다.");
+        }
+
+        this.setOrderStatus(OrderStatus.CANCEL);
+        for(OrderItem orderItem : orderItems){
+            orderItem.cancel();
+        }
+    }
+
+    public int getTotalPrice(){
+        int totalPrice = 0;
+        for(OrderItem orderItem : orderItems){
+            totalPrice += orderItem.getTotalPrice();
+        }
+        return  totalPrice;
     }
 
 }

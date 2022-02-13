@@ -13,8 +13,8 @@ public class OrderItem {
     @Column(name = "order_item_id")
     private Long id;
 
-    public int count;
-    public int price;
+    private int count;
+    private int orderprice;
 
     @ManyToOne(fetch= FetchType.LAZY)
     @JoinColumn(name = "order_id")
@@ -23,4 +23,23 @@ public class OrderItem {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id")
     private Item item;
+
+    public static OrderItem createOrderItem(Item item, int orderprice, int count){
+        OrderItem orderItem = new OrderItem();
+        orderItem.setItem(item);
+        orderItem.setOrderprice(orderprice);
+        orderItem.setCount(count);
+
+        item.removeStock(count);
+
+        return orderItem;
+    }
+
+    public void cancel(){
+        getItem().addStock(count);
+    }
+
+    public int getTotalPrice(){
+        return orderprice * count;
+    }
 }
