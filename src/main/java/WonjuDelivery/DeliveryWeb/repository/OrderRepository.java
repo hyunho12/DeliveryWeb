@@ -1,6 +1,7 @@
 package WonjuDelivery.DeliveryWeb.repository;
 
 import WonjuDelivery.DeliveryWeb.domain.Order;
+import WonjuDelivery.DeliveryWeb.domain.OrderSearch;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -20,5 +21,7 @@ public class OrderRepository {
         return em.find(Order.class,id);
     }
 
-
+    public List<Order> findAllByString(OrderSearch orderSearch) {
+        return null;
+    }
 }
