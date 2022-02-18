@@ -20,6 +20,14 @@ public class ItemService {
         return item.getId();
     }
 
+    public void updateItem(Long itemId, String name, int price, int stockQuantity, String detail){
+        Item findItem = itemRepository.findOne(itemId);
+        findItem.setName(name);
+        findItem.setPrice(price);
+        findItem.setStockQuantity(stockQuantity);
+        findItem.setDetail(detail);
+    }
+
     public List<Item> findItems(){
         return itemRepository.findAll();
     }

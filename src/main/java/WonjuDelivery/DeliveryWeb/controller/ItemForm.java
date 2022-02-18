@@ -8,6 +8,7 @@ public class ItemForm {
     private Long id;
 
     private String name;
+    private String detail;
     private int price;
     private int stockQuantity;
 
