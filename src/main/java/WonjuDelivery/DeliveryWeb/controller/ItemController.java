@@ -59,7 +59,10 @@ public class ItemController {
     }
 
     @PostMapping("/items/{itemId}/edit")
-    public String updateItem(ItemForm itemForm){
+    public String updateItem(ItemForm Form){
+        itemService.updateItem(Form.getId(),Form.getName(), Form.getPrice(), Form.getStockQuantity(), Form.getDetail());
+
+        /*
         Item item = new Item();
         item.setId(itemForm.getId());
         item.setName(itemForm.getName());
@@ -67,7 +70,7 @@ public class ItemController {
         item.setStockQuantity(itemForm.getStockQuantity());
         item.setDetail(itemForm.getDetail());
 
-        itemService.saveItem(item);
+        itemService.saveItem(item); */
         return "redirect:/items";
     }
 }

@@ -20,6 +20,7 @@ public class ItemService {
         return item.getId();
     }
 
+    @Transactional
     public void updateItem(Long itemId, String name, int price, int stockQuantity, String detail){
         Item findItem = itemRepository.findOne(itemId);
         findItem.setName(name);
