@@ -12,6 +12,7 @@ public class Item {
     @Id @GeneratedValue
     @Column(name = "item_id")
     private Long id;
+    private Long test;
 
     public String name;
     private int price;
